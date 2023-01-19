@@ -41,15 +41,15 @@ public class addRecipe extends JFrame{
             Main.recipeList.add( new Recipe(name,type,duration,nrIng));
            for(int i = 0; i < Main.recipeList.size();++i) {
                System.out.print(Main.recipeList.get(i).formattedToString());
-               Serialization serializer = new Serialization();
 
-// Serializing the object to the file
-               try {
-                   serializer.serialize(Main.recipeList.get(i));
-               } catch (IOException ex) {
-                   throw new RuntimeException(ex);
-               }
+//               Serialization serialization = new Serialization();
 
+//                // Serializing the object to the file
+//               try {
+//                   serialization.serialize(Main.recipeList);
+//               } catch (IOException ex) {
+//                   throw new RuntimeException(ex);
+//               }
 
            }
 
