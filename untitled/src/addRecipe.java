@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class addRecipe extends JFrame{
     private JTextField nameField;
@@ -40,7 +41,16 @@ public class addRecipe extends JFrame{
             Main.recipeList.add( new Recipe(name,type,duration,nrIng));
            for(int i = 0; i < Main.recipeList.size();++i) {
                System.out.print(Main.recipeList.get(i).formattedToString());
-               Serialization.serialize(Main.recipeList.get(i));
+               Serialization serializer = new Serialization();
+
+// Serializing the object to the file
+               try {
+                   serializer.serialize(Main.recipeList.get(i));
+               } catch (IOException ex) {
+                   throw new RuntimeException(ex);
+               }
+
+
            }
 
 
