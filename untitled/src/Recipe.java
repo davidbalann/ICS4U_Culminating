@@ -1,17 +1,18 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Recipe {
+public class Recipe implements java.io.Serializable {
+
+    private static final long serialVersionUID = 1L;
     public String Name,Type;
     public int Duration, nrIng;
-    public String[] IngList;
+    public ArrayList<String> IngList;
 
-    Recipe(String name,String type, int duration, String[] ingList){
+    Recipe(String name,String type, int duration, ArrayList<String> ingList){
         Name = name;
         Type = type;
         Duration = duration;
         IngList = ingList;
-        nrIng = ingList.length;
+        nrIng = ingList.size();
     }
 
     public String getName() {
@@ -38,11 +39,11 @@ public class Recipe {
         Duration = duration;
     }
 
-    public String[] getIngList() {
+    public ArrayList<String> getIngList() {
         return IngList;
     }
 
-    public void setIngList(String[] ingList) {
+    public void setIngList(ArrayList<String> ingList) {
         IngList = ingList;
     }
 
@@ -50,10 +51,10 @@ public class Recipe {
     public String toString() {
         return "Recipe{" +
                 "Name ='" + Name + '\'' +
-                ", Type= '" + Type + '\'' +
-                ", Duration= " + Duration +
-                ", nrIng= " + nrIng +
-                ", IngList= " + Arrays.toString(IngList) +
+                ", Type = '" + Type + '\'' +
+                ", Duration = " + Duration +
+                ", nrIng = " + nrIng +
+                ", IngList = " + IngList.toString() +
                 '}';
     }
 
@@ -62,8 +63,8 @@ public class Recipe {
                 "Name                  " + Name  +"\n"+
                 "Type                  " + Type +"\n"+
                 "Duration              " + Duration +"\n"+
-                "Number Of Ingrediants " + nrIng +"\n"+
-                "Ingrediant List: \n\t\t " +  Arrays.toString(IngList)
+                "Number Of Ingredients " + nrIng +"\n"+
+                "Ingredient List: \n\t\t " + IngList.toString()
                 .replace(",", "\n\t\t")  //remove the commas
                 .replace("[", "\n\t\t")  //remove the right bracket
                 .replace("]", "")  //remove the left bracket
