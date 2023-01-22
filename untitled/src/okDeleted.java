@@ -2,14 +2,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class okDeleted extends JFrame{
+public class okDeleted extends JFrame {
     private JButton okButton;
     private JPanel okPageDeleted;
-    public okDeleted(){
+
+    public okDeleted() {
         setContentPane(okPageDeleted);
         setTitle("Delete Recipe");
-        setSize(600,600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(600, 600);
+         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                RecipeSerializer.serialize(Main.recipeList, "recipe.ser");
+                System.exit(0);
+            }
+        });
         setVisible(true);
 
 

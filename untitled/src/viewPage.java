@@ -10,15 +10,20 @@ public class viewPage extends JFrame {
     private JComboBox comboBox1;
     private JButton displayButton;
 
-    public viewPage(){
+    public viewPage() {
         viewArea.setText("");
         setContentPane(viewPage);
         setTitle("View Recipes");
-        setSize(600,600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(600, 600);
+         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                RecipeSerializer.serialize(Main.recipeList, "recipe.ser");
+                System.exit(0);
+            }
+        });
         setVisible(true);
 
-        for(int i = 0; i < Main.recipeList.size();++i)
+        for (int i = 0; i < Main.recipeList.size(); ++i)
             viewArea.append(Main.recipeList.get(i).formattedToString());
 
         homeButton.addActionListener(new ActionListener() {

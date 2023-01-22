@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class shopPage extends JFrame{
+public class shopPage extends JFrame {
     private JButton displayButton;
     private JComboBox comboBox1;
     private JTextArea displayStuffHereTextArea;
@@ -12,12 +12,20 @@ public class shopPage extends JFrame{
     private JPanel shopPage;
 
 
-    public shopPage(){
+    public shopPage() {
         setContentPane(shopPage);
         setTitle("Shop Recipes");
-        setSize(600,600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(600, 600);
+         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                RecipeSerializer.serialize(Main.recipeList, "recipe.ser");
+                System.exit(0);
+            }
+        });
         setVisible(true);
+
+        for (int i = 0; i < Main.recipeList.size(); ++i)
+            displayStuffHereTextArea.append(Main.recipeList.get(i).formattedToString());
 
 
         backButton.addActionListener(new ActionListener() {
