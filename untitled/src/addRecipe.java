@@ -1,58 +1,53 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class addRecipe extends JFrame{
-    private JTextField nameField;
+
+public class addRecipe extends JFrame {
+    private  JTextField nameField;
     private JButton addRecipeButton;
     private JComboBox typeComboBox;
     private JButton backButton;
     private JPanel addNewPage;
     private JTextField durationField;
-    private JTextField nrIngrediantsField;
+    private JTextField nrIngredientField;
 
-    public addRecipe() {
+    addRecipe() {
 
         setContentPane(addNewPage);
         setTitle("Delete Recipe");
-        setSize(600,600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-    backButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            editRecipe p1 = new editRecipe();
-            p1.show();
-            dispose();
-        }
-    });
-    addRecipeButton.addActionListener(new ActionListener() {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-
-            String name    = nameField.getText();
-            String type    = typeComboBox.getSelectedItem().toString();
-            int duration   = Integer.parseInt(durationField.getText());
-
-
-            ArrayList<String> nrIng = new ArrayList<String>();
-            String[] ingredients = nrIngrediantsField.getText().split(",");
-            nrIng.addAll(Arrays.asList(ingredients));
-
-            if (Main.recipeList == null) {
-                Main.recipeList = new ArrayList<Recipe>();
+        setSize(600, 600);
+         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                RecipeSerializer.serialize(Main.recipeList, "recipe.ser");
+                System.exit(0);
             }
-            Main.recipeList.add( new Recipe(name,type,duration,nrIng));
+        });
+        setVisible(true);
 
-            okAdded p1 = new okAdded();
-            p1.show();
-            dispose();
-        }
-    });
-}
+
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editRecipe p1 = new editRecipe();
+                p1.show();
+                dispose();
+            }
+        });
+        addRecipeButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+               RecipeManager add = new RecipeManager(nameField.getText(),typeComboBox.getSelectedItem().toString(),Integer.parseInt(durationField.getText()),nrIngredientField.getText().split(","));
+               add.addRecipes();
+
+                okAdded p1 = new okAdded();
+                p1.show();
+                dispose();
+            }
+        });
+    }
 }

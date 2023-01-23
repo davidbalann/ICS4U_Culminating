@@ -3,11 +3,11 @@ import java.util.ArrayList;
 public class Recipe implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
-    public String Name,Type;
+    public String Name, Type;
     public int Duration, nrIng;
     public ArrayList<String> IngList;
 
-    Recipe(String name,String type, int duration, ArrayList<String> ingList){
+    Recipe(String name, String type, int duration, ArrayList<String> ingList) {
         Name = name;
         Type = type;
         Duration = duration;
@@ -60,10 +60,10 @@ public class Recipe implements java.io.Serializable {
 
     public String formattedToString() {
         return "\n----------------------------------------\n" +
-                "Name                  " + Name  +"\n"+
-                "Type                  " + Type +"\n"+
-                "Duration              " + Duration +"\n"+
-                "Number Of Ingredients " + nrIng +"\n"+
+                "Name                  " + Name + "\n" +
+                "Type                  " + Type + "\n" +
+                "Duration              " + Duration + "\n" +
+                "Number Of Ingredients " + nrIng + "\n" +
                 "Ingredient List: \n\t\t " + IngList.toString()
                 .replace(",", "\n\t\t")  //remove the commas
                 .replace("[", "\n\t\t")  //remove the right bracket

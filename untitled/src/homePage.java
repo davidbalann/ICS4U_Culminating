@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class homePage extends JFrame{
+public class homePage extends JFrame {
     private JPanel MainPage;
     private JPanel mainPanel;
     private JLabel Title;
@@ -11,15 +11,22 @@ public class homePage extends JFrame{
     private JButton shopButton;
     private JButton manageButton;
 
-    public homePage(){
+    public homePage() {
         setContentPane(mainPanel);
         setTitle("Recipe Manager");
-        setSize(400,600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(400, 600);
+         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                RecipeSerializer.serialize(Main.recipeList, "recipe.ser");
+                System.exit(0);
+            }
+        });
+
         setVisible(true);
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                RecipeSerializer.serialize(Main.recipeList, "recipe.ser");
                 System.exit(0);
             }
         });

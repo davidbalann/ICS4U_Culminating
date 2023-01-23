@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class viewPage extends JFrame {
@@ -9,17 +11,33 @@ public class viewPage extends JFrame {
     private JTextArea viewArea;
     private JComboBox comboBox1;
     private JButton displayButton;
+    private JScrollPane scroll;
 
-    public viewPage(){
+    public viewPage() {
         viewArea.setText("");
         setContentPane(viewPage);
         setTitle("View Recipes");
-        setSize(600,600);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(600, 700);
+         addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                RecipeSerializer.serialize(Main.recipeList, "recipe.ser");
+                System.exit(0);
+            }
+        });
+
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setViewportView(viewArea);
         setVisible(true);
 
-        for(int i = 0; i < Main.recipeList.size();++i)
+        for (int i = 0; i < Main.recipeList.size(); ++i)
             viewArea.append(Main.recipeList.get(i).formattedToString());
+
+
+
+
+
+
+
 
         homeButton.addActionListener(new ActionListener() {
             @Override
@@ -30,5 +48,16 @@ public class viewPage extends JFrame {
 
             }
         });
+        displayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int[] order = RecipeManager.sortRecipe(comboBox1.getSelectedItem().toString());
+
+                viewArea.setText("");
+                for (int i = 0; i < Main.recipeList.size(); ++i)
+                    viewArea.append(Main.recipeList.get(order[i]).formattedToString());
+            }
+        });
     }
+
 }
