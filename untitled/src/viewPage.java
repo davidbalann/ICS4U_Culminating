@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -25,8 +26,15 @@ public class viewPage extends JFrame {
             }
         });
 
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+       // scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        //scroll.setViewportView(viewArea);
+
+        scroll.setBounds(100,100, 50,100);
         scroll.setViewportView(viewArea);
+        viewArea.setLineWrap(true);
+        viewArea.setWrapStyleWord(true);
+        scroll.setViewportView(viewArea);
+        //scroll.add(viewArea);
         setVisible(true);
 
         for (int i = 0; i < Main.recipeList.size(); ++i)
@@ -59,5 +67,7 @@ public class viewPage extends JFrame {
             }
         });
     }
+
+
 
 }

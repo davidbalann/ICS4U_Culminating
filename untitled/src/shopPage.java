@@ -5,11 +5,12 @@ import java.awt.event.ActionListener;
 public class shopPage extends JFrame {
     private JButton displayButton;
     private JComboBox comboBox1;
-    private JTextArea displayStuffHereTextArea;
+    private JTextArea viewArea;
     private JButton backButton;
     private JButton continueButton;
     private JTextField textField1;
     private JPanel shopPage;
+    private JScrollPane scroll;
 
 
     public shopPage() {
@@ -22,10 +23,16 @@ public class shopPage extends JFrame {
                 System.exit(0);
             }
         });
+        scroll.setBounds(100,100, 50,100);
+        scroll.setViewportView(viewArea);
+        viewArea.setLineWrap(true);
+        viewArea.setWrapStyleWord(true);
+        scroll.setViewportView(viewArea);
+        //scroll.add(viewArea);
         setVisible(true);
 
         for (int i = 0; i < Main.recipeList.size(); ++i)
-            displayStuffHereTextArea.append(Main.recipeList.get(i).formattedToString());
+            viewArea.append(Main.recipeList.get(i).formattedToString());
 
 
         backButton.addActionListener(new ActionListener() {
@@ -42,6 +49,16 @@ public class shopPage extends JFrame {
                 ingredientsPage p1 = new ingredientsPage();
                 p1.show();
                 dispose();
+            }
+        });
+        displayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int[] order = RecipeManager.sortRecipe(comboBox1.getSelectedItem().toString());
+
+                viewArea.setText("");
+                for (int i = 0; i < Main.recipeList.size(); ++i)
+                    viewArea.append(Main.recipeList.get(order[i]).formattedToString());
             }
         });
     }
