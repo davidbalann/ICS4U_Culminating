@@ -70,4 +70,14 @@ public class Recipe implements java.io.Serializable {
                 .replace("]", "")  //remove the left bracket
                 .trim();
     }
+    public String ingredientsToString() {
+        return  "Name                  " + Name + "\n" +
+                "Number Of Ingredients " + nrIng + "\n" +
+                "Ingredient List:\n\t\t " + IngList.toString()
+                .replace(",", "\n\t\t")  //remove the commas
+                .replace("[", "\n\t\t ")  //remove the right bracket
+                .replace("]", " ")  //remove the left bracket
+                .trim();
+    }
 }
+

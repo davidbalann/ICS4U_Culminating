@@ -1,6 +1,9 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class shopPage extends JFrame {
     private JButton displayButton;
@@ -8,9 +11,11 @@ public class shopPage extends JFrame {
     private JTextArea viewArea;
     private JButton backButton;
     private JButton continueButton;
-    private JTextField textField1;
+    private JTextField recipeShop;
     private JPanel shopPage;
     private JScrollPane scroll;
+    private JLabel errorLable;
+    private JLabel secondLable;
 
 
     public shopPage() {
@@ -38,28 +43,73 @@ public class shopPage extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                homePage p1 = new homePage();
-                p1.show();
-                dispose();
+                back();
             }
         });
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ingredientsPage p1 = new ingredientsPage();
-                p1.show();
-                dispose();
+                continuePage();
             }
         });
         displayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] order = RecipeManager.sortRecipe(comboBox1.getSelectedItem().toString());
-
-                viewArea.setText("");
-                for (int i = 0; i < Main.recipeList.size(); ++i)
-                    viewArea.append(Main.recipeList.get(order[i]).formattedToString());
+                display();
+            }
+        });
+        recipeShop.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    continuePage();
+                }
+            }
+        });
+        displayButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    display();
+                }
+            }
+        });
+        backButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    back();
+                }
+            }
+        });
+        continueButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    continuePage();
+                }
             }
         });
     }
+
+    void continuePage(){
+        if(!(recipeShop.getText().trim().isEmpty())){
+        ingredientsPage p1 = new ingredientsPage(recipeShop.getText());
+        p1.show();
+        dispose();
+        }
+        else {
+            secondLable.setText("Please Enter Proper Data");
+        }
+    }
+    void display(){
+        int[] order = RecipeManager.sortRecipe(comboBox1.getSelectedItem().toString());
+
+        viewArea.setText("");
+        for (int i = 0; i < Main.recipeList.size(); ++i)
+            viewArea.append(Main.recipeList.get(order[i]).formattedToString());
+    }
+    void back(){
+        homePage p1 = new homePage();
+        p1.show();
+        dispose();
+    }
 }
+
+

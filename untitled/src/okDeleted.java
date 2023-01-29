@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class okDeleted extends JFrame {
     private JButton okButton;
@@ -22,10 +24,21 @@ public class okDeleted extends JFrame {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                homePage p1 = new homePage();
-                p1.show();
-                dispose();
+                home();
             }
         });
+        okButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    home();
+                }
+            }
+        });
+    }
+
+    void home(){
+        homePage p1 = new homePage();
+        p1.show();
+        dispose();
     }
 }

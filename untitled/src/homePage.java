@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class homePage extends JFrame {
     private JPanel MainPage;
@@ -26,35 +28,75 @@ public class homePage extends JFrame {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RecipeSerializer.serialize(Main.recipeList, "recipe.ser");
-                System.exit(0);
+                quit();
             }
         });
         viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                viewPage p1 = new viewPage();
-                p1.show();
-                dispose();
+                view();
             }
         });
         shopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                shopPage p1 = new shopPage();
-                p1.show();
-                dispose();
+                shop();
             }
         });
         manageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                editRecipe p1 = new editRecipe();
-                p1.show();
-                dispose();
+                manage();
+            }
+        });
+        viewButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    view();
+                }
+            }
+        });
+        shopButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    shop();
+                }
+            }
+        });
+        manageButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    manage();
+                }
+            }
+        });
+        quitButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    quit();
+                }
             }
         });
     }
 
+    void view(){
+        viewPage p1 = new viewPage();
+        p1.show();
+        dispose();
+    }
+    void shop(){
+        shopPage p1 = new shopPage();
+        p1.show();
+        dispose();
+    }
+    void manage(){
+        editRecipe p1 = new editRecipe();
+        p1.show();
+        dispose();
+    }
+    void quit(){
+        RecipeSerializer.serialize(Main.recipeList, "recipe.ser");
+        System.exit(0);
+    }
 
 }

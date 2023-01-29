@@ -58,7 +58,7 @@ public class RecipeManager {
             }
 
         }
-        else if (sortType.equals("Time")){
+        else if (sortType.equals("Duration")){
 
             for (int i = 1; i < order.length; i++) {
                 int key = order[i];
