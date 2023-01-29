@@ -3,6 +3,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 public class homePage extends JFrame {
     private JPanel MainPage;
@@ -23,6 +27,12 @@ public class homePage extends JFrame {
                 System.exit(0);
             }
         });
+         try {
+             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+         }catch (Exception e){
+
+
+         }
 
         setVisible(true);
         quitButton.addActionListener(new ActionListener() {

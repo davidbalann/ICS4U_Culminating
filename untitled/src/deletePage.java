@@ -13,6 +13,7 @@ public class deletePage extends JFrame {
     private JButton backButton;
     private JPanel deleteRecipePage;
     private JScrollPane scroll;
+    private JLabel errorLable;
 
     deletePage() {
         setContentPane(deleteRecipePage);
@@ -77,16 +78,36 @@ public class deletePage extends JFrame {
         dispose();
     }
     void deleted(){
+        if(deletedValue.getText().trim().isEmpty())
+        {
+            errorLable.setText("Please Enter A Recipe To Delete");
+        }
+        else {
 
-        String name = deletedValue.getText();
-        for (int i = 0; i < Main.recipeList.size(); i++) {
-            if (Main.recipeList.get(i).getName().equalsIgnoreCase(name)) {
-                Main.recipeList.remove(i);
-                break;
+            String name = deletedValue.getText();
+            int j = 0;
+            for (int i = 0; i < Main.recipeList.size(); i++) {
+                if (Main.recipeList.get(i).getName().equalsIgnoreCase(name)) {
+                    ++j;
+                    break;
+                }
+            }
+
+            if (j == 0)
+                errorLable.setText("Recipe Not Found");
+            else {
+
+
+                for (int i = 0; i < Main.recipeList.size(); i++) {
+                    if (Main.recipeList.get(i).getName().equalsIgnoreCase(name)) {
+                        Main.recipeList.remove(i);
+                        break;
+                    }
+                }
+                okDeleted p1 = new okDeleted();
+                p1.show();
+                dispose();
             }
         }
-        okDeleted p1 = new okDeleted();
-        p1.show();
-        dispose();
     }
 }

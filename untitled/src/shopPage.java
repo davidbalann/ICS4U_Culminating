@@ -90,9 +90,18 @@ public class shopPage extends JFrame {
 
     void continuePage(){
         if(!(recipeShop.getText().trim().isEmpty())){
-        ingredientsPage p1 = new ingredientsPage(recipeShop.getText());
-        p1.show();
-        dispose();
+            int j = 0;
+            for (int i = 0; i < Main.recipeList.size(); i++) {
+                if (Main.recipeList.get(i).getName().equalsIgnoreCase(recipeShop.getText())) {
+                    ingredientsPage p1 = new ingredientsPage(recipeShop.getText());
+                    p1.show();
+                    dispose();
+                    ++j;
+                    break;
+                }
+            }
+            if(j == 0)
+                secondLable.setText("Recipe Not Found");
         }
         else {
             secondLable.setText("Please Enter Proper Data");
