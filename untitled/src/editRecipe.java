@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class editRecipe extends JFrame {
     private JButton addRecipeButton;
@@ -23,26 +25,58 @@ public class editRecipe extends JFrame {
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                homePage p1 = new homePage();
-                p1.show();
-                dispose();
+                home();
             }
         });
         removeRecipeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deletePage p1 = new deletePage();
-                p1.show();
-                dispose();
+                remove();
             }
         });
         addRecipeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addRecipe p1 = new addRecipe();
-                p1.show();
-                dispose();
+                add();
             }
         });
+        addRecipeButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    add();
+                }
+            }
+        });
+        removeRecipeButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    remove();
+                }
+            }
+        });
+        homeButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    home();
+                }
+            }
+        });
+    }
+
+    void home(){
+        homePage p1 = new homePage();
+        p1.show();
+        dispose();
+    }
+    void remove(){
+
+        deletePage p1 = new deletePage();
+        p1.show();
+        dispose();
+    }
+    void add(){
+        addRecipe p1 = new addRecipe();
+        p1.show();
+        dispose();
     }
 }

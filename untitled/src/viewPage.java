@@ -1,8 +1,6 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 
 
 public class viewPage extends JFrame {
@@ -25,39 +23,62 @@ public class viewPage extends JFrame {
             }
         });
 
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+       // scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        //scroll.setViewportView(viewArea);
+
+        scroll.setBounds(100,100, 50,100);
         scroll.setViewportView(viewArea);
+        viewArea.setLineWrap(true);
+        viewArea.setWrapStyleWord(true);
+        scroll.setViewportView(viewArea);
+        //scroll.add(viewArea);
         setVisible(true);
 
         for (int i = 0; i < Main.recipeList.size(); ++i)
             viewArea.append(Main.recipeList.get(i).formattedToString());
 
 
-
-
-
-
-
-
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                homePage p1 = new homePage();
-                p1.show();
-                dispose();
+                home();
 
             }
         });
         displayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] order = RecipeManager.sortRecipe(comboBox1.getSelectedItem().toString());
-
-                viewArea.setText("");
-                for (int i = 0; i < Main.recipeList.size(); ++i)
-                    viewArea.append(Main.recipeList.get(order[i]).formattedToString());
+                display();
+            }
+        });
+        displayButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    display();
+                }
+            }
+        });
+        homeButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    home();
+                }
             }
         });
     }
+
+    void home(){
+        homePage p1 = new homePage();
+        p1.show();
+        dispose();
+    }
+    void display(){
+        int[] order = RecipeManager.sortRecipe(comboBox1.getSelectedItem().toString());
+
+        viewArea.setText("");
+        for (int i = 0; i < Main.recipeList.size(); ++i)
+            viewArea.append(Main.recipeList.get(order[i]).formattedToString());
+    }
+
 
 }
