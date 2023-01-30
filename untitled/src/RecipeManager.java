@@ -43,20 +43,20 @@ public class RecipeManager {
                 }
             }
         }
-        else if (sortType.equals("Type")){
 
+        else if (sortType.equals("Type")) {
             for (int i = 0; i < Main.recipeList.size(); i++) {
-                int minIndex = i;
-                for (int j = i + 1; j < Main.recipeList.size(); j++) {
-                    if (Main.recipeList.get(j).Type.compareTo(Main.recipeList.get(minIndex).Type) < 0) {
-                        minIndex = j;
+                for (int j = i; j > 0; j--) {
+                    if (Main.recipeList.get(j).getType().compareTo(Main.recipeList.get(j - 1).getType()) < 0) {
+                        Recipe temp = Main.recipeList.get(j);
+                        Main.recipeList.set(j, Main.recipeList.get(j - 1));
+                        Main.recipeList.set(j - 1, temp);
+                        int tempOrder = order[j];
+                        order[j] = order[j - 1];
+                        order[j - 1] = tempOrder;
                     }
                 }
-                int temp = order[i];
-                order[i] = order[minIndex];
-                order[minIndex] = temp;
             }
-
         }
         else if (sortType.equals("Duration")){
 
@@ -90,7 +90,5 @@ public class RecipeManager {
 
         return order;
     }
-
-
 
 }
