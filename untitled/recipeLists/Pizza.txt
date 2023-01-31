@@ -1,6 +1,0 @@
-Name                  Pizza
-Number Of Ingredients 3
-Ingredient List:
-		 Dough
-		  Tomato Sauce
-		  Cheese
