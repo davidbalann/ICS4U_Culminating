@@ -1,6 +1,0 @@
-Name                  Apple Pie
-Number Of Ingredients 3
-Ingredient List:
-		 Pie Crust
-		 Sugar
-		 Apple

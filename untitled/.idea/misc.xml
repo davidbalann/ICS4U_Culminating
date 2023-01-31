@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <pattern value="Recipe" method="getDuration" />
+    <pattern value="Recipe" />
+    <pattern value="Recipe" method="setDuration" />
+    <pattern value="Recipe" method="setIngList" />
+    <pattern value="Recipe" method="setName" />
+    <pattern value="Recipe" method="setType" />
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

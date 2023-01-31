@@ -1,11 +1,16 @@
 import java.io.*;
-import java.util.*;
 
+/**
+ * The RecipeFileCreator is responsible for making a text file with the shopping list then opening
+ * the notepad application to display said list.
+ */
 public class RecipeFileCreator {
+    @SuppressWarnings({"deprecation", "MethodNameSameAsClassName"})
     public static void RecipeFileCreator(String title, String text) {
         try {
             // Create the text file with the title and the .txt extension
             File file = new File("recipeLists/" + title + ".txt");
+            //noinspection ResultOfMethodCallIgnored
             file.createNewFile();
 
             // Write the text string to the file

@@ -1,25 +1,24 @@
-import java.io.EOFException;
-import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * Main program (Controller) where the program starts
+ * Deserializes the data from the file "recipe.ser" and stores it in the ArrayList
+ * Displays the home page
+ */
+@SuppressWarnings({"JavadocDeclaration", "RedundantSuppression"})
 public class Main {
-    public static ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+    //Declares a static ArrayList to store recipes
+    public static ArrayList<Recipe> recipeList = new ArrayList<>();
 
-    /**
-     * @param args
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException, EOFException {
+    public static void main(String[] args) {
+        //Checks if recipeList is null, creates a new ArrayList if it is
         if (recipeList == null) {
-            recipeList = new ArrayList<Recipe>();
+            recipeList = new ArrayList<>();
         }
-            recipeList = RecipeSerializer.deserialize("recipe.ser");
+        //Deserializes the data from "recipe.ser"
+        recipeList = RecipeSerializer.deserialize("recipe.ser");
 
-
-        homePage display = new homePage();
+        //Displays the home page
+        @SuppressWarnings("unused") homePage display = new homePage();
     }
 }
